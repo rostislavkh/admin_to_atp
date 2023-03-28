@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Drivers;
 
+use Carbon\Carbon;
 use App\Models\Driver;
 use Orchid\Screen\Screen;
 use Illuminate\Http\Request;
@@ -9,10 +10,12 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Support\Facades\Toast;
 use Orchid\Support\Facades\Layout;
+use Illuminate\Support\Facades\Bus;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Actions\ModalToggle;
 use App\Http\Requests\CreateDriverStore;
 use App\Http\Requests\UpdateDriverStore;
+use App\Jobs\SendEmailToDriverLaterDayJob;
 
 class Drivers extends Screen
 {
@@ -141,7 +144,13 @@ class Drivers extends Screen
 
     public function remove(Request $request)
     {
-        \App\Models\Driver::find($request->id)->delete();
+        $driver = \App\Models\Driver::find($request->id);
+
+        if ($driver->email) {
+            dispatch(new SendEmailToDriverLaterDayJob($driver->email, $driver->last_name));
+        }
+
+        $driver->delete();
 
         Toast::success(__('Driver was removed'));
     }
