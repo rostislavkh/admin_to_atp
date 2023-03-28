@@ -31,7 +31,7 @@ class Drivers extends Table
         return [
             TD::make('id', __('ID')),
             TD::make('src_img', 'Image link')->render(function (Driver $model) {
-                return $model->src_img ? '<img src="' . $model->src_img . '" alt="img" style="max-height: 100px;" class="mw-100 d-block img-fluid">' : '';
+                return $model->getSrc() ? '<img src="' . $model->getSrc() . '" alt="img" style="max-height: 100px;" class="mw-100 d-block img-fluid">' : 'No image';
             }),
             TD::make('first_name', 'First name')->sort()->filter(),
             TD::make('last_name', 'Last name')->sort()->filter(),

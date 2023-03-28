@@ -2,16 +2,17 @@
 
 namespace App\Orchid\Screens\Drivers;
 
-use App\Http\Requests\CreateDriverStore;
-use App\Http\Requests\UpdateDriverStore;
 use App\Models\Driver;
 use Orchid\Screen\Screen;
 use Illuminate\Http\Request;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Support\Facades\Toast;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Actions\ModalToggle;
+use App\Http\Requests\CreateDriverStore;
+use App\Http\Requests\UpdateDriverStore;
 
 class Drivers extends Screen
 {
@@ -70,12 +71,14 @@ class Drivers extends Screen
     {
         return [
             Layout::modal('create', Layout::rows([
+                Upload::make('attachment')->title('Image (file)')->maxFiles(1)->acceptedFiles('image/*'),
                 Input::make('src_img')->title('Image link'),
                 Input::make('first_name')->title('First name')->min(3)->max(100)->required(),
                 Input::make('last_name')->title('Last name')->min(3)->max(100)->required(),
                 DateTimer::make('birthday')->title('Birthday')->allowInput()->format('Y-m-d')->required()
             ])),
             Layout::modal('edit', Layout::rows([
+                Upload::make('model.attachment')->title('Image (file)')->maxFiles(1)->acceptedFiles('image/*'),
                 Input::make('model.src_img')->title('Image link'),
                 Input::make('model.first_name')->title('First name')->min(3)->max(100)->required(),
                 Input::make('model.last_name')->title('Last name')->min(3)->max(100)->required(),
@@ -87,6 +90,8 @@ class Drivers extends Screen
 
     public function asyncGetModel(\App\Models\Driver $model): array
     {
+        $model->load('attachment');
+
         return [
             'model' => $model
         ];
@@ -94,12 +99,18 @@ class Drivers extends Screen
 
     public function create(CreateDriverStore $request)
     {
-        Driver::create([
+        $driver = Driver::create([
             'src_img' => $request->src_img,
             'first_name' => strtolower($request->first_name),
             'last_name' => $request->last_name,
             'birthday' => $request->birthday
         ]);
+
+        $driver->load('attachment');
+
+        $driver->attachment()->syncWithoutDetaching(
+            $request->input('attachment', [])
+        );
 
         Toast::success(__('Driver was created'));
     }
@@ -113,12 +124,16 @@ class Drivers extends Screen
             'birthday' => \Illuminate\Support\Arr::get($request->model, 'birthday', 'No birthday')
         ]);
 
+        $model->attachment()->syncWithoutDetaching(
+            $request->input('model.attachment', [])
+        );
+
         Toast::success(__('Driver was updated'));
     }
 
     public function remove(Request $request)
     {
-        \App\Models\CarBrand::find($request->id)->delete();
+        \App\Models\Driver::find($request->id)->delete();
 
         Toast::success(__('Driver was removed'));
     }
