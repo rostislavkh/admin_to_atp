@@ -32,7 +32,9 @@ class CreateDriverStore extends FormRequest
                 'required',
                 'date',
                 new IsOldDriver()
-            ]
+            ],
+            'email' => 'required|email',
+            'salary' => 'required|numeric'
         ];
     }
 }

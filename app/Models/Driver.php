@@ -19,7 +19,9 @@ class Driver extends Model
         'src_img',
         'first_name',
         'last_name',
-        'birthday'
+        'birthday',
+        'salary',
+        'email'
     ];
 
     protected $allowedFilters = [
@@ -27,6 +29,8 @@ class Driver extends Model
         'first_name',
         'last_name',
         'birthday',
+        'salary',
+        'email',
         'updated_at',
         'created_at',
     ];
@@ -36,6 +40,8 @@ class Driver extends Model
         'first_name',
         'last_name',
         'birthday',
+        'salary',
+        'email',
         'updated_at',
         'created_at',
     ];

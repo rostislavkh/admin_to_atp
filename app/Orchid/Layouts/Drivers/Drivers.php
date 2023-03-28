@@ -33,6 +33,8 @@ class Drivers extends Table
             TD::make('src_img', 'Image link')->render(function (Driver $model) {
                 return $model->getSrc() ? '<img src="' . $model->getSrc() . '" alt="img" style="max-height: 100px;" class="mw-100 d-block img-fluid">' : 'No image';
             }),
+            TD::make('email', 'Email')->sort()->filter(),
+            TD::make('salary', 'Salary')->sort()->filter(),
             TD::make('first_name', 'First name')->sort()->filter(),
             TD::make('last_name', 'Last name')->sort()->filter(),
             TD::make('birthday', 'Birthday')->sort()->filter(TD::FILTER_DATE_RANGE),

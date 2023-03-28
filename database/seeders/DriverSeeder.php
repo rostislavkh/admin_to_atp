@@ -21,7 +21,9 @@ class DriverSeeder extends Seeder
             Driver::create([
                 'first_name' => strtolower(Str::random(10)),
                 'last_name' => Str::random(10),
-                'birthday' => Carbon::now()->subYears(rand(21, 65))->addWeeks(rand(5, 10))->addDays(rand(5, 10))
+                'birthday' => Carbon::now()->subYears(rand(21, 65))->addWeeks(rand(5, 10))->addDays(rand(5, 10)),
+                'salary' => rand(5000, 30000),
+                'email' => strtolower(Str::random(rand(5, 10))) . '@gmail.com',
             ]);
         }
     }

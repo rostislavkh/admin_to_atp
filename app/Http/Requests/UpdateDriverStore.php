@@ -27,7 +27,9 @@ class UpdateDriverStore extends FormRequest
             'model.src_img' => 'nullable|url',
             'model.first_name' => 'required|min:3|max:100',
             'model.last_name' => 'required|min:3|max:100',
-            'model.birthday' => 'required|date'
+            'model.birthday' => 'required|date',
+            'model.email' => 'required|email',
+            'model.salary' => 'required|numeric'
         ];
     }
 }
