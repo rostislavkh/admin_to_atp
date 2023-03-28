@@ -18,10 +18,16 @@ class CarBrand extends Model
     ];
 
     protected $allowedFilters = [
-        'name'
+        'id',
+        'name',
+        'updated_at',
+        'created_at'
     ];
 
     protected $allowedSorts = [
-        'name'
+        'id',
+        'name',
+        'updated_at',
+        'created_at'
     ];
 }

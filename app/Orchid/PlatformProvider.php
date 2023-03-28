@@ -31,7 +31,14 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Car brands')
                 ->title('Cars')
                 ->icon('tag')
-                ->route('platform.car-brands'),
+                ->route('platform.car-brands')
+                ->permission('platform.car-brands'),
+
+            Menu::make('Drivers')
+                ->title('Drivers')
+                ->icon('people')
+                ->route('platform.drivers')
+                ->permission('platform.drivers'),
 
             Menu::make(__('Users'))
                 ->icon('user')
@@ -69,6 +76,8 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.systems.users', __('Users')),
             ItemPermission::group(__('Cars'))
                 ->addPermission('platform.car-brands', __('Brans')),
+            ItemPermission::group(__('Drivers'))
+                ->addPermission('platform.drivers', __('Drivers')),
         ];
     }
 }

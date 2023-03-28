@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\Cars\Brands;
+use App\Orchid\Screens\Drivers\Drivers;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -83,6 +84,9 @@ Route::screen('roles', RoleListScreen::class)
         ->parent('platform.index')
         ->push(__('Roles'), route('platform.systems.roles')));
 
-
 Route::screen('car-brands', Brands::class)
     ->name('platform.car-brands');
+
+Route::screen('drivers', Drivers::class)
+    ->name('platform.drivers');
+    
