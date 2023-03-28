@@ -40,6 +40,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.drivers')
                 ->permission('platform.drivers'),
 
+            Menu::make('Buses')
+                ->title('Buses')
+                ->icon('number-list')
+                ->route('platform.buses')
+                ->permission('platform.buses'),
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
@@ -78,6 +84,8 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.car-brands', __('Brans')),
             ItemPermission::group(__('Drivers'))
                 ->addPermission('platform.drivers', __('Drivers')),
+            ItemPermission::group(__('Buses'))
+                ->addPermission('platform.buses', __('Buses')),
         ];
     }
 }

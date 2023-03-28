@@ -70,7 +70,7 @@ class Brands extends Screen
                 Input::make('name')->title('Name')->max(100)->required()
             ])),
             Layout::modal('edit', Layout::rows([
-                Input::make('model.name')->title('Bid')->max(100)->required()
+                Input::make('model.name')->title('name')->max(100)->required()
             ]))->async('asyncGetModel'),
             \App\Orchid\Layouts\Cars\Brands::class
         ];

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Buses\Buses;
 use App\Orchid\Screens\Cars\Brands;
 use App\Orchid\Screens\Drivers\Drivers;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
@@ -89,4 +90,7 @@ Route::screen('car-brands', Brands::class)
 
 Route::screen('drivers', Drivers::class)
     ->name('platform.drivers');
+    
+Route::screen('buses', Buses::class)
+    ->name('platform.buses');
     

@@ -96,7 +96,7 @@ class Drivers extends Screen
     {
         Driver::create([
             'src_img' => $request->src_img,
-            'first_name' => $request->first_name,
+            'first_name' => strtolower($request->first_name),
             'last_name' => $request->last_name,
             'birthday' => $request->birthday
         ]);
@@ -108,7 +108,7 @@ class Drivers extends Screen
     {
         $model->update([
             'src_img' => \Illuminate\Support\Arr::get($request->model, 'src_img', null),
-            'first_name' => \Illuminate\Support\Arr::get($request->model, 'first_name', 'No name'),
+            'first_name' => strtolower(\Illuminate\Support\Arr::get($request->model, 'first_name', 'No name')),
             'last_name' => \Illuminate\Support\Arr::get($request->model, 'last_name', 'No name'),
             'birthday' => \Illuminate\Support\Arr::get($request->model, 'birthday', 'No birthday')
         ]);

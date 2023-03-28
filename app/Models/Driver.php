@@ -37,4 +37,9 @@ class Driver extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function setFirstNameAttribute(string $value): void
+    {
+        $this->attributes['first_name'] = strtolower($value);
+    }
 }
